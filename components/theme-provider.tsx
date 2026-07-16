@@ -2,9 +2,6 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
-import { Monitor, Moon, Sun } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
 
 function ThemeProvider({
   children,
@@ -21,36 +18,6 @@ function ThemeProvider({
       <ThemeHotkey />
       {children}
     </NextThemesProvider>
-  )
-}
-
-function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => setMounted(true), [])
-
-  const isDark = resolvedTheme === "dark"
-
-  // Avoid a hydration mismatch: render a neutral placeholder until mounted.
-  if (!mounted) {
-    return (
-      <Button variant="ghost" size="icon" aria-label="Toggle theme">
-        <Monitor className="opacity-50" />
-      </Button>
-    )
-  }
-
-  return (
-    <Button
-      variant="ghost"
-      size="icon"
-      aria-label="Toggle theme"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-    >
-      <Sun className="hidden dark:inline" />
-      <Moon className="inline dark:hidden" />
-    </Button>
   )
 }
 
@@ -101,4 +68,4 @@ function ThemeHotkey() {
   return null
 }
 
-export { ThemeProvider, ThemeToggle }
+export { ThemeProvider }
